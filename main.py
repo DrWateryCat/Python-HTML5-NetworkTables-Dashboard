@@ -22,15 +22,10 @@ def init_networktables(ipaddr):
 	
 if __name__ == "__main__":
 	parser = OptionParser()
+	parser.add_option('-p', '--port', default=8888, help='Port to run the server on')
+	parser.add_option('-v', '--verbose', default=False, action='store_true', help='Enable verbose logging')
+	parser.add_option('--robot', default='127.0.0.1', help="Robot's IP address")
 	
-	parser.add_option('-p', '--port', default=8888, 
-                      help='Port to run web server on')
-    
-    parser.add_option('-v', '--verbose', default=False, action='store_true', 
-                      help='Enable verbose logging')
-    
-    parser.add_option('--robot', default='127.0.0.1', 
-                      help="Robot's IP address")
 	options, args = parser.parse_args()
 	
 	logging.basicConfig(datefmt=log_datefmt,
