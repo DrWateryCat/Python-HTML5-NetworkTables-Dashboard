@@ -4,7 +4,7 @@ from optparse import OptionParser
 import tornado.web
 from tornado.ioloop import IOLoop
 
-from networktables import Networktable
+from networktables import NetworkTable as Networktable
 from pynetworktables2js import get_handlers, NonCachingStaticFileHandler
 
 import logging
@@ -30,10 +30,10 @@ if __name__ == "__main__":
 	
 	logging.basicConfig(datefmt=log_datefmt,
 						format=log_format,
-						level=logging.DEBUG if options.verbose else logger.INFO)
-	init_networktables()
+						level=logging.DEBUG if options.verbose else logging.INFO)
+	init_networktables(options.robot)
 	
-	www_dir = abspath(join(__file__), '.')
+	www_dir = abspath(join(__file__, "../"))
 	index_html = join(www_dir, 'index.html')
 	
 	if not exists(www_dir):
