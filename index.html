@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<style>
-			div.robotinfo {
+			div.robotinfo, div.dashboard_data {
 				font-family: Arial, Helvetica, sans-serif;
 				font-size:10;
 				color: #FFFFFF
@@ -21,13 +21,30 @@
 			Robot: <span id="robotstate">Unknown</span>
 			
 		</div>
+		<br />
+		<hr />
+		<div class="dashboard_data">
+			Lifter State: <span id="lifterstate">Unknown</span><br/>
+		</div>
+		<br />
+		<br />
+		<div class="debug_grid">
+			<table id="nt" border=1>
+				<tbody></tbody>
+			</table>
+		</div>
 		<script type="text/javascript">
 		"use strict";
 		$(document).ready(function(){
 			NetworkTables.addWsConnectionListener(onNetworkConnection, true);
 			NetworkTables.addRobotConnectionListener(function(connected){
 				$("#robotstate").text(connected ? "Connected" : "Not connected");
-			})
+			});
+			NetworkTables.addKeyListener(function(key, value, isNew){
+				if(key == "lifter"){
+					$("lifterstate").text(value);
+				}
+			});
 		});
 		
 		function onNetworkConnection(connected){
