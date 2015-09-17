@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<style>
-			div.robotinfo, div.dashboard_data {
+			div.robotinfo, div.dashboard_data, div.debug_grid {
 				font-family: Arial, Helvetica, sans-serif;
 				font-size:10;
 				color: #FFFFFF
@@ -41,8 +41,12 @@
 				$("#robotstate").text(connected ? "Connected" : "Not connected");
 			});
 			NetworkTables.addKeyListener(function(key, value, isNew){
-				if(key == "lifter"){
-					$("lifterstate").text(value);
+				if(isNew){
+					var tr = $('<tr></tr>').appendTo($('#nt > tbody:last'));
+					$('<td></td>').text(key).appendTo(tr);
+					$('<td></td>').attr('id', NetworkTables.keyToId(key)).text(value).appendTo(tr);
+				} else {
+					$('#' + NetworkTables.keySelector(key)).text(value);
 				}
 			});
 		});
