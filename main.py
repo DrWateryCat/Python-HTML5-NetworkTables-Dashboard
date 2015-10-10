@@ -19,6 +19,7 @@ def init_networktables(ipaddr):
 	Networktable.setClientMode()
 	Networktable.initialize()
 	logger.info("Initialized networktables")
+	logger.info("Waiting...")
 	
 if __name__ == "__main__":
 	parser = OptionParser()
