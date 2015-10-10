@@ -51,6 +51,7 @@
 			});
 			
 			NetworkTables.addKeyListener(function(key, value, isNew){
+				if(key === "lifterState") {
 				switch(value)
 				{
 				case(null):
@@ -65,6 +66,7 @@
 				case(-1):
 					$('#lifterstate').text("Going down");
 					break;
+				}
 				}
 			});
 		});
