@@ -49,6 +49,24 @@
 					$('#' + NetworkTables.keySelector(key)).text(value);
 				}
 			});
+			
+			NetworkTables.addKeyListener(function(key, value, isNew){
+				switch(value)
+				{
+				case(null):
+					$('#lifterstate').text("Unknown");
+					break;
+				case(0):
+					$('#lifterstate').text("Still");
+					break;
+				case(1):
+					$('#lifterstate').text("Going up");
+					break;
+				case(-1):
+					$('#lifterstate').text("Going down");
+					break;
+				}
+			});
 		});
 		
 		function onNetworkConnection(connected){
